@@ -56,6 +56,32 @@ class FailingAnalyzer:
         raise TimeoutError("AI timed out")
 
 
+class FixedFalsePositiveAnalyzer:
+    def __init__(self, total: int) -> None:
+        self.total = total
+
+    def analyze(self, alert, evidence):
+        quotient, remainder = divmod(self.total, 4)
+        scores = [quotient] * 4
+        for index in range(remainder):
+            scores[index] += 1
+        return AIAnalysisResult(
+            suggested_result="likely_false_positive",
+            confidence=ConfidenceBreakdown(
+                evidence_completeness=scores[0],
+                support_strength=scores[1],
+                evidence_consistency=scores[2],
+                conclusion_clarity=scores[3],
+                total=self.total,
+                reason="R-302 threshold acceptance test",
+            ),
+            supporting_evidence=[EvidenceReason(evidence_id="EV-002", reason="有效授权")],
+            contradicting_evidence=[EvidenceReason(evidence_id="EV-003", reason="恶意情报")],
+            recommended_action="按阈值路由",
+            summary="R-302 冲突证据的固定验收输出",
+        )
+
+
 def workflow(settings: Settings, analyzer=None) -> AlertWorkflow:
     return AlertWorkflow(
         data_store=JsonDataStore(DATA_DIR),
@@ -86,6 +112,28 @@ def test_need_ai_path_calls_ai(settings: Settings) -> None:
     state = workflow(settings, analyzer).run("ALT-008")
     assert analyzer.calls == 1
     assert state["analysis_mode"] == "ai"
+
+
+@pytest.mark.parametrize(
+    ("confidence", "expected_status", "expected_action", "need_human"),
+    [
+        (90, "completed", "confirm_false_positive_by_ai", False),
+        (70, "waiting_human", "manual_review", True),
+    ],
+)
+def test_r302_full_ai_path_on_both_sides_of_threshold(
+    settings: Settings,
+    confidence: int,
+    expected_status: str,
+    expected_action: str,
+    need_human: bool,
+) -> None:
+    state = workflow(settings, FixedFalsePositiveAnalyzer(confidence)).run("ALT-005")
+    assert state["rule_result"].matched_rule.rule_id == "R-302"
+    assert state["ai_result"].confidence.total == confidence
+    assert state["status"] == expected_status
+    assert state["final_action"] == expected_action
+    assert state["need_human"] is need_human
 
 
 @pytest.mark.parametrize(

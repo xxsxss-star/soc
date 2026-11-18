@@ -25,6 +25,16 @@ class DecisionResult(BaseModel):
     reason: str
 
 
+class HumanDecisionRecord(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    decision: Literal[
+        "confirm_false_positive", "confirm_true_positive", "continue_investigation"
+    ]
+    comment: str
+    submitted_at: datetime
+
+
 class RunRecord(BaseModel):
     model_config = ConfigDict(extra="forbid")
 

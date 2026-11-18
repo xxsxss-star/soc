@@ -6,7 +6,7 @@ from pydantic import BaseModel, ConfigDict, Field, IPvAnyAddress
 from backend.models.ai_result import AIAnalysisResult
 from backend.models.evidence import EvidencePackage
 from backend.models.rule import RuleResult
-from backend.models.run import DecisionResult, TimelineEvent
+from backend.models.run import DecisionResult, HumanDecisionRecord, TimelineEvent
 
 
 class AlertListItem(BaseModel):
@@ -18,7 +18,7 @@ class AlertListItem(BaseModel):
     hostname: str
     dst_ip: IPvAnyAddress
     demo_scenario: str
-    status: Literal["ready"] = "ready"
+    status: Literal["ready", "processing", "waiting_human", "completed", "failed"] = "ready"
 
 
 class AlertListResponse(BaseModel):
@@ -46,11 +46,18 @@ class RunResponse(BaseModel):
     rule_result: RuleResult | None = None
     ai_result: AIAnalysisResult | None = None
     decision: DecisionResult | None = None
+    human_decision: HumanDecisionRecord | None = None
 
 
 class HumanDecisionRequest(BaseModel):
     decision: Literal["confirm_false_positive", "confirm_true_positive", "continue_investigation"]
     comment: str = ""
+
+
+class HumanDecisionResponse(BaseModel):
+    run_id: str
+    status: Literal["completed"] = "completed"
+    human_decision: HumanDecisionRecord
 
 
 class HealthResponse(BaseModel):

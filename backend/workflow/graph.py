@@ -89,8 +89,9 @@ class AlertWorkflow:
             settings=self.settings,
         )
 
-    def run(self, alert_id: str, run_id: str | None = None) -> WorkflowState:
-        initial: WorkflowState = {
+    @staticmethod
+    def initial_state(alert_id: str, run_id: str | None = None) -> WorkflowState:
+        return {
             "run_id": run_id or f"RUN-{uuid4().hex[:12]}",
             "alert_id": alert_id,
             "status": "queued",
@@ -99,4 +100,10 @@ class AlertWorkflow:
             "errors": [],
             "ai_validation_errors": [],
         }
-        return self.graph.invoke(initial)
+
+    def stream(self, alert_id: str, run_id: str | None = None):
+        initial = self.initial_state(alert_id, run_id)
+        yield from self.graph.stream(initial, stream_mode="values")
+
+    def run(self, alert_id: str, run_id: str | None = None) -> WorkflowState:
+        return self.graph.invoke(self.initial_state(alert_id, run_id))
