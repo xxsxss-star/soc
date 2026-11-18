@@ -1,0 +1,10 @@
+[
+  {"alert_id":"ALT-001","host_id":"HOST-001","events":[{"time":"2026-11-18T10:20:10+08:00","event":"powershell.exe 启动授权扫描脚本"},{"time":"2026-11-18T10:21:32+08:00","event":"扫描脚本连接测试目标"}],"privilege_escalation":false,"lateral_movement":false,"data_exfiltration":false,"payload_download":false},
+  {"alert_id":"ALT-002","host_id":"HOST-002","events":[{"time":"2026-11-18T10:39:00+08:00","event":"异常凭据登录相邻主机"},{"time":"2026-11-18T10:40:00+08:00","event":"远程服务创建"}],"privilege_escalation":false,"lateral_movement":true,"data_exfiltration":false,"payload_download":false},
+  {"alert_id":"ALT-003","host_id":"HOST-003","events":[{"time":"2026-11-18T11:01:00+08:00","event":"数据库导出大文件"},{"time":"2026-11-18T11:02:00+08:00","event":"持续向外部地址上传 850MB 数据"}],"privilege_escalation":false,"lateral_movement":false,"data_exfiltration":true,"payload_download":false},
+  {"alert_id":"ALT-004","host_id":"HOST-004","events":[{"time":"2026-11-18T11:20:00+08:00","event":"核心交易服务进程连接外部 C2 地址"}],"privilege_escalation":false,"lateral_movement":false,"data_exfiltration":false,"payload_download":false},
+  {"alert_id":"ALT-005","host_id":"HOST-005","events":[{"time":"2026-11-18T14:10:00+08:00","event":"授权渗透测试工具连接目标"}],"privilege_escalation":false,"lateral_movement":false,"data_exfiltration":false,"payload_download":false},
+  {"alert_id":"ALT-006","host_id":"HOST-006","events":[{"time":"2026-11-18T14:30:00+08:00","event":"浏览器外进程连接恶意软件分发地址"}],"privilege_escalation":false,"lateral_movement":false,"data_exfiltration":false,"payload_download":true},
+  {"alert_id":"ALT-008","host_id":"HOST-008","events":[{"time":"2026-11-18T15:20:00+08:00","event":"自动化测试程序访问共享测试服务"}],"privilege_escalation":false,"lateral_movement":false,"data_exfiltration":false,"payload_download":false},
+  {"host_id":"HOST-009","events":[{"time":"2026-11-18T15:39:00+08:00","event":"未知脚本建立一次短连接"}],"privilege_escalation":false,"lateral_movement":false,"data_exfiltration":false,"payload_download":false}
+]

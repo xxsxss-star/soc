@@ -1,0 +1,10 @@
+[
+  {"host_id":"HOST-001","asset_type":"security_test_server","department":"安全部","business_importance":"low","environment":"test","owner":"secops","internet_exposed":false},
+  {"host_id":"HOST-002","asset_type":"employee_workstation","department":"财务部","business_importance":"medium","environment":"production","owner":"lisi","internet_exposed":false},
+  {"host_id":"HOST-003","asset_type":"database_server","department":"数据平台部","business_importance":"high","environment":"production","owner":"dbadmin","internet_exposed":false},
+  {"host_id":"HOST-004","asset_type":"core_business_server","department":"交易业务部","business_importance":"high","environment":"production","owner":"wangwu","internet_exposed":true},
+  {"host_id":"HOST-005","asset_type":"scanner","department":"安全部","business_importance":"low","environment":"test","owner":"secops","internet_exposed":false},
+  {"host_id":"HOST-006","asset_type":"employee_workstation","department":"研发部","business_importance":"medium","environment":"production","owner":"zhaoliu","internet_exposed":false},
+  {"host_id":"HOST-008","asset_type":"development_server","department":"研发部","business_importance":"low","environment":"development","owner":"devops","internet_exposed":false},
+  {"host_id":"HOST-009","asset_type":"employee_workstation","department":"市场部","business_importance":"medium","environment":"production","owner":"sunqi","internet_exposed":false}
+]

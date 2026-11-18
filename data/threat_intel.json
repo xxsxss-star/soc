@@ -1,0 +1,10 @@
+[
+  {"indicator":"198.51.100.10","indicator_type":"ip","malicious":false,"threat_type":"scanner_test_endpoint","confidence":95,"source":"mock_threat_intelligence","last_seen":"2026-11-18T08:00:00+08:00"},
+  {"indicator":"203.0.113.25","indicator_type":"ip","malicious":true,"threat_type":"C2","confidence":91,"source":"mock_threat_intelligence","last_seen":"2026-11-17T20:00:00+08:00"},
+  {"indicator":"203.0.113.40","indicator_type":"ip","malicious":true,"threat_type":"exfiltration_endpoint","confidence":96,"source":"mock_threat_intelligence","last_seen":"2026-11-18T07:00:00+08:00"},
+  {"indicator":"203.0.113.55","indicator_type":"ip","malicious":true,"threat_type":"botnet","confidence":88,"source":"mock_threat_intelligence","last_seen":"2026-11-16T10:00:00+08:00"},
+  {"indicator":"203.0.113.8","indicator_type":"ip","malicious":true,"threat_type":"C2","confidence":82,"source":"mock_threat_intelligence","last_seen":"2026-11-18T09:00:00+08:00"},
+  {"indicator":"198.51.100.77","indicator_type":"ip","malicious":true,"threat_type":"malware_distribution","confidence":93,"source":"mock_threat_intelligence","last_seen":"2026-11-18T11:00:00+08:00"},
+  {"indicator":"192.0.2.70","indicator_type":"ip","malicious":false,"threat_type":"shared_test_service","confidence":72,"source":"mock_threat_intelligence","last_seen":"2026-11-10T08:00:00+08:00"},
+  {"indicator":"192.0.2.90","indicator_type":"ip","malicious":false,"threat_type":"unknown","confidence":45,"source":"mock_threat_intelligence","last_seen":"2026-10-20T08:00:00+08:00"}
+]
