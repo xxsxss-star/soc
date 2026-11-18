@@ -1,0 +1,15 @@
+.git
+.github
+.idea
+.agents
+.codex
+.venv
+__pycache__
+.pytest_cache
+*.py[cod]
+*.log
+.env
+.env.production
+草稿.md
+tests
+
