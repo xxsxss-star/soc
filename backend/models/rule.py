@@ -17,5 +17,6 @@ class RuleResult(BaseModel):
 
     decision: Literal["HIGH_RISK", "RULE_CONFIRMED_FP", "MANUAL_ENRICHMENT", "NEED_AI"]
     matched_rule: MatchedRule
+    evidence_refs: list[str] = Field(default_factory=list)
     need_ai: bool
     need_human: bool
